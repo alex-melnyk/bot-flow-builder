@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import GraphView from 'react-digraph';
+import {DropTarget} from 'react-dnd';
 
-import GraphConfig from './graph-config';
+import GraphConfig from './config';
 
 const styles = {
     graph: {
@@ -24,7 +25,7 @@ const SPECIAL_EDGE_TYPE = "specialEdge";
 // NOTE: Edges must have 'source' & 'target' attributes
 // In a more realistic use case, the graph would probably originate
 // elsewhere in the App or be generated from some other state upstream of this component.
-const sample = {
+const DATA = {
     "nodes": [
         {
             "id": 1,
@@ -72,7 +73,7 @@ const sample = {
 
 class Graph extends Component {
     state = {
-        graph: sample,
+        graph: DATA,
         selected: {}
     };
 
@@ -80,6 +81,7 @@ class Graph extends Component {
     getViewNode = nodeKey => {
         const searchNode = {};
         searchNode[NODE_KEY] = nodeKey;
+
         const i = this.getNodeIndex(searchNode);
         return this.state.graph.nodes[i]
     };
@@ -109,7 +111,7 @@ class Graph extends Component {
     };
 
     // Edge 'mouseUp' handler
-    onSelectEdge = viewEdge => {
+    onSelectEdge = (viewEdge) => {
         this.setState({selected: viewEdge});
     };
 
@@ -130,7 +132,7 @@ class Graph extends Component {
             type: type,
             x: x,
             y: y
-        }
+        };
 
         graph.nodes.push(viewNode);
         this.setState({graph: graph});
@@ -165,7 +167,7 @@ class Graph extends Component {
             source: sourceViewNode[NODE_KEY],
             target: targetViewNode[NODE_KEY],
             type: type
-        }
+        };
 
         // Only add the edge when the source node is not the same as the target
         if (viewEdge.source !== viewEdge.target) {
@@ -213,7 +215,6 @@ class Graph extends Component {
     /*
      * Render
      */
-
     render() {
         const nodes = this.state.graph.nodes;
         const edges = this.state.graph.edges;
@@ -223,8 +224,13 @@ class Graph extends Component {
         const NodeSubtypes = GraphConfig.NodeSubtypes;
         const EdgeTypes = GraphConfig.EdgeTypes;
 
-        return (
-            <div id='graph' style={styles.graph}>
+        const {isOver, canDrop, connectDropTarget} = this.props;
+
+        return connectDropTarget(
+            <div id='graph' style={{
+                ...styles.graph,
+                opacity: isOver ? 0.5 : 1
+            }}>
 
                 <GraphView
                     ref={(el) => this.GraphView = el}
@@ -255,4 +261,56 @@ class Graph extends Component {
 }
 
 
-export default Graph;
+export default DropTarget('card', {
+    canDrop: (props, monitor) => {
+        // You can disallow drop based on props or item
+        const item = monitor.getItem();
+        console.log('canDrop', item);
+        return true;//canMakeChessMove(item.fromPosition, props.position);
+    },
+    hover: (props, monitor, component) => {
+        // This is fired very often and lets you perform side effects
+        // in response to the hover. You can't handle enter and leave
+        // here—if you need them, put monitor.isOver() into collect() so you
+        // can just use componentWillReceiveProps() to handle enter/leave.
+
+        // You can access the coordinates if you need them
+        // const clientOffset = monitor.getClientOffset();
+        // const componentRect = findDOMNode(component).getBoundingClientRect();
+
+        // You can check whether we're over a nested drop target
+        // const isJustOverThisOne = monitor.isOver({ shallow: true });
+
+        // You will receive hover() even for items for which canDrop() is false
+        console.log('hover');
+        const canDrop = monitor.canDrop();
+    },
+    drop: (props, monitor, component) => {
+        if (monitor.didDrop()) {
+            // If you want, you can check whether some nested
+            // target already handled drop
+            return;
+        }
+
+        // Obtain the dragged item
+        const item = monitor.getItem();
+        console.log('drop', item);
+
+        // You can do something with it
+        // ChessActions.movePiece(item.fromPosition, props.position);
+
+        // You can also do nothing and return a drop result,
+        // which will be available as monitor.getDropResult()
+        // in the drag source's endDrag() method
+        return {moved: true};
+    }
+}, (connect, monitor) => ({
+    // Call this function inside render()
+    // to let React DnD handle the drag events:
+    connectDropTarget: connect.dropTarget(),
+    // You can ask the monitor about the current drag state:
+    isOver: monitor.isOver(),
+    isOverCurrent: monitor.isOver({shallow: true}),
+    canDrop: monitor.canDrop(),
+    itemType: monitor.getItemType()
+}))(Graph);
