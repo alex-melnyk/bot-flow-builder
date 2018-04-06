@@ -1,12 +1,14 @@
 import React, {Component} from 'react';
+import uuid from 'uuid';
 import classNames from 'classnames';
 import {AppBar, Divider, Drawer, Grow, List, ListItem, ListSubheader, Toolbar, Typography} from "material-ui";
 import {withStyles} from 'material-ui/styles';
 import {DragDropContext} from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 
-import Graph from './Graph';
+import GraphContainer from '../containers/GraphContainer';
 import CardBlock from "./common/CardBlock";
+import {BlockMocks} from "../types";
 
 const drawerWidth = 350;
 
@@ -43,6 +45,16 @@ const styles = theme => ({
 });
 
 class App extends Component {
+    renderBlocks = () => (
+        BlockMocks.map((block, index) => (
+            <ListItem key={uuid()}>
+                <Grow in={true} timeout={1500 * index}>
+                    <CardBlock {...block}/>
+                </Grow>
+            </ListItem>
+        ))
+    );
+
     render() {
         const {classes} = this.props;
 
@@ -69,48 +81,13 @@ class App extends Component {
                     <Divider/>
                     <List>
                         <ListSubheader>Flow blocks</ListSubheader>
-                        <ListItem>
-                            <Grow in={true} timeout={0}>
-                                <CardBlock
-                                    icon="play_for_work"
-                                    header="Start"
-                                    content="Base block to start from."
-                                />
-                            </Grow>
-                        </ListItem>
-                        <ListItem>
-                            <Grow in={true} timeout={500}>
-                                <CardBlock
-                                    icon="help_outline"
-                                    header="Question"
-                                    content="Block to ask something."
-                                />
-                            </Grow>
-                        </ListItem>
-                        <ListItem>
-                            <Grow in={true} timeout={1000}>
-                                <CardBlock
-                                    icon="call_split"
-                                    header="Variant"
-                                    content="Block to provide answer variant."
-                                />
-                            </Grow>
-                        </ListItem>
-                        <ListItem>
-                            <Grow in={true} timeout={1500}>
-                                <CardBlock
-                                    icon="priority_high"
-                                    header="Answer"
-                                    content="Block to provide message after answer."
-                                />
-                            </Grow>
-                        </ListItem>
+                        {this.renderBlocks()}
                     </List>
                 </Drawer>
 
                 <main className={classes.content}>
                     <div className={classes.toolbar}/>
-                    <Graph/>
+                    <GraphContainer/>
                 </main>
             </div>
         );

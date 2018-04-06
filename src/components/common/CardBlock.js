@@ -52,7 +52,9 @@ class CardBlock extends Component {
 }
 
 export default DragSource('card', {
-    beginDrag: (props) => props.data
+    beginDrag: (props) => ({
+        type: props.type
+    })
 }, (connect, monitor) => ({
     connectDragSource: connect.dragSource(),
     isDragging: monitor.isDragging()

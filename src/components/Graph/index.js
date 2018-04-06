@@ -265,7 +265,7 @@ export default DropTarget('card', {
     canDrop: (props, monitor) => {
         // You can disallow drop based on props or item
         const item = monitor.getItem();
-        console.log('canDrop', item);
+        console.log('canDrop', item, props);
         return true;//canMakeChessMove(item.fromPosition, props.position);
     },
     hover: (props, monitor, component) => {
