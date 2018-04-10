@@ -8,7 +8,8 @@ import GraphConfig from './config';
 const styles = {
     graph: {
         height: 'calc(100% - 64px)',
-        width: '100%'
+        width: '100%',
+        fontFamily: 'Roboto'
     }
 };
 
@@ -196,7 +197,7 @@ class Graph extends Component {
 
                     graphControls={false}
                     enableFocus={false}
-                    minZoom={1}
+                    minZoom={0.5}
                     maxZoom={1}
                     gridSpacing={25}
                     gridDot={1}
