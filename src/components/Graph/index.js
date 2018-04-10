@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import GraphView from 'react-digraph';
 import {DropTarget} from 'react-dnd';
 
@@ -17,16 +18,8 @@ const NODE_KEY = "id"; // Key used to identify nodes
 // However, GraphView renders text differently for empty types
 // so this has to be passed in if that behavior is desired.
 const EMPTY_TYPE = "empty"; // Empty node type
-const SPECIAL_TYPE = "special";
-const SPECIAL_CHILD_SUBTYPE = "specialChild";
-const EMPTY_EDGE_TYPE = "emptyEdge";
-const SPECIAL_EDGE_TYPE = "specialEdge";
 
 class Graph extends Component {
-    state = {
-        selected: {}
-    };
-
     // Helper to find the index of a given node
     getNodeIndex = (searchNode) => {
         return this.props.nodes.find((node) => node[NODE_KEY] === searchNode[NODE_KEY]);
@@ -41,45 +34,48 @@ class Graph extends Component {
     onUpdateNode = (viewNode) => {
         const nodeIndex = this.props.nodes.findIndex((node) => node[NODE_KEY] === viewNode[NODE_KEY]);
 
-        this.props.updateNode(nodeIndex, viewNode);
+        this.props.updateNodeAction(nodeIndex, viewNode);
     };
 
     // Creates a new node between two edges
     onCreateEdge = (sourceViewNode, targetViewNode) => {
-        const graph = this.state.graph;
-
-        // This is just an example - any sort of logic
-        // could be used here to determine edge type
-        // const type = sourceViewNode.type === SPECIAL_TYPE ? SPECIAL_EDGE_TYPE : EMPTY_EDGE_TYPE;
-
-        const viewEdge = {
+        this.props.addEdgeAction({
             source: sourceViewNode[NODE_KEY],
             target: targetViewNode[NODE_KEY],
-            type: EMPTY_EDGE_TYPE
-        };
-
-        this.props.addEdge(viewEdge);
-
-        // Only add the edge when the source node is not the same as the target
-        // if (viewEdge.source !== viewEdge.target) {
-        //     graph.edges.push(viewEdge);
-        //     this.setState({graph: graph});
-        // }
+            type: "emptyEdge"
+        });
     };
-
 
     /*
      * Handlers/Interaction
      */
 
     // Node 'mouseUp' handler
-    onSelectNode = viewNode => {
+    onSelectNode = (viewNode) => {
         // Deselect events will send Null viewNode
         // if (!!viewNode) {
         //     this.setState({selected: viewNode});
         // } else {
         //     this.setState({selected: {}});
         // }
+
+        const {
+            selectedNode,
+            setSelectedNode,
+            drawerCloseAction,
+            drawerOpenAction
+        } = this.props;
+
+        if (selectedNode && !viewNode) {
+            setSelectedNode();
+            drawerCloseAction();
+        } else {
+            setSelectedNode(viewNode);
+        }
+
+        if (viewNode && selectedNode && viewNode.id === selectedNode.id) {
+            drawerOpenAction();
+        }
     };
 
     // Edge 'mouseUp' handler
@@ -111,7 +107,7 @@ class Graph extends Component {
     };
 
     // Deletes a node from the graph
-    onDeleteNode = viewNode => {
+    onDeleteNode = (viewNode) => {
         // const graph = this.state.graph;
         // const i = this.getNodeIndex(viewNode);
         // graph.nodes.splice(i, 1);
@@ -141,7 +137,7 @@ class Graph extends Component {
     };
 
     // Called when an edge is deleted
-    onDeleteEdge = viewEdge => {
+    onDeleteEdge = (viewEdge) => {
         // const graph = this.state.graph;
         // const i = this.getEdgeIndex(viewEdge);
         // graph.edges.splice(i, 1);
@@ -158,12 +154,9 @@ class Graph extends Component {
      */
     render() {
         const {
-            selected
-        } = this.state;
-
-        const {
             nodes,
             edges,
+            selectedNode,
             isOver,
             connectDropTarget
         } = this.props;
@@ -174,26 +167,23 @@ class Graph extends Component {
             EdgeTypes
         } = GraphConfig;
 
-        if (this.GraphView) {
-            console.log('GV', this.GraphView);
-        }
-
         return connectDropTarget(
             <div id='graph' style={{
                 ...styles.graph,
                 opacity: isOver ? 0.75 : 1
             }}>
-
                 <GraphView
-                    ref={(ref) => this.GraphView = ref}
                     nodeKey={NODE_KEY}
-                    emptyType={EMPTY_TYPE}
+
                     nodes={nodes}
                     edges={edges}
-                    selected={selected}
+                    selected={selectedNode}
+
+                    emptyType={EMPTY_TYPE}
                     nodeTypes={NodeTypes}
                     nodeSubtypes={NodeSubtypes}
                     edgeTypes={EdgeTypes}
+
                     getViewNode={this.getViewNode}
                     onSelectNode={this.onSelectNode}
                     onCreateNode={this.onCreateNode}
@@ -203,20 +193,28 @@ class Graph extends Component {
                     onCreateEdge={this.onCreateEdge}
                     onSwapEdge={this.onSwapEdge}
                     onDeleteEdge={this.onDeleteEdge}
-                    graphControls={false}
 
+                    graphControls={false}
+                    enableFocus={false}
                     minZoom={1}
                     maxZoom={1}
-                    enableFocus={false}
                     gridSpacing={25}
                     gridDot={1}
                 />
             </div>
         );
     }
-
 }
 
+Graph.propTypes = {
+    nodes: PropTypes.array,
+    edges: PropTypes.array,
+    updateNodeAction: PropTypes.func.isRequired,
+    addNodeAction: PropTypes.func.isRequired,
+    addEdgeAction: PropTypes.func.isRequired,
+    setSelectedNode: PropTypes.func.isRequired,
+    drawerOpenAction: PropTypes.func.isRequired,
+};
 
 export default DropTarget('card', {
     canDrop: (props, monitor) => {
@@ -234,7 +232,7 @@ export default DropTarget('card', {
         const item = monitor.getItem();
         const location = monitor.getSourceClientOffset();
 
-        props.addNode(item.type, {
+        props.addNodeAction(item.type, {
             x: location.x - 175,
             y: location.y - 32
         });

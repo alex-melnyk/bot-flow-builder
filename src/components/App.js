@@ -9,6 +9,7 @@ import HTML5Backend from 'react-dnd-html5-backend';
 import GraphContainer from '../containers/GraphContainer';
 import CardBlock from "./common/CardBlock";
 import {BlockMocks} from "../types";
+import DetailsContainer from "../containers/DetailsContainer";
 
 const drawerWidth = 350;
 
@@ -56,7 +57,9 @@ class App extends Component {
     );
 
     render() {
-        const {classes} = this.props;
+        const {
+            classes
+        } = this.props;
 
         return (
             <div className={classes.root}>
@@ -89,6 +92,8 @@ class App extends Component {
                     <div className={classes.toolbar}/>
                     <GraphContainer/>
                 </main>
+
+                <DetailsContainer />
             </div>
         );
 

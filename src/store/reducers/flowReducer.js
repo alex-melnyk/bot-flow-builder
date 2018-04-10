@@ -4,7 +4,8 @@ import * as FlowActions from '../actions/flowActions';
 
 const initialState = {
     nodes: [],
-    edges: []
+    edges: [],
+    selectedNode: {}
 };
 
 export default (state = initialState, action) => {
@@ -41,6 +42,11 @@ export default (state = initialState, action) => {
                     ...state.edges,
                     action.payload.nodesEdge
                 ]
+            };
+        case FlowActions.FLOW_ACTION_SET_SELECTED_NODE:
+            return {
+                ...state,
+                ...action.payload
             };
         default:
             return state;

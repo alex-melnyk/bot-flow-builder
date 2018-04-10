@@ -1,5 +1,5 @@
 import React from 'react';
-import {blue} from "material-ui/colors";
+import {grey} from "material-ui/colors";
 
 import * as BlockTypes from "../../types/blockTypes";
 
@@ -20,7 +20,7 @@ const iconProps = {
     strokeWidth: 0,
     fontFamily :"Material Icons",
     fontSize: 5,
-    fill: blue[500]
+    fill: grey[900]
 };
 
 const StartShape = (

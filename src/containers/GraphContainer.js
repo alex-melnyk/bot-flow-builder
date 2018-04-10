@@ -1,15 +1,15 @@
 import {connect} from "react-redux";
 import Graph from '../components/Graph';
-import {
-    addEdge,
-    addNode,
-    updateNode
-} from '../store/actions/flowActions';
+import {addEdgeAction, addNodeAction, setSelectedNode, updateNodeAction} from '../store/actions/flowActions';
+import {drawerCloseAction, drawerOpenAction} from "../store/actions/detailsActions";
 
 export default connect((state) => ({
     ...state.flow
 }), {
-    updateNode,
-    addNode,
-    addEdge
+    updateNodeAction,
+    addNodeAction,
+    addEdgeAction,
+    setSelectedNode,
+    drawerOpenAction,
+    drawerCloseAction
 })(Graph);
