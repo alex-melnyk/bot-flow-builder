@@ -1,6 +1,7 @@
 import uuid from "uuid";
 
 import * as FlowActions from '../actions/flowActions';
+import * as DetailsActions from "../actions/detailsActions";
 
 const initialState = {
     nodes: [],
@@ -47,6 +48,11 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 ...action.payload
+            };
+        case DetailsActions.DETAILS_ACTION_DRAWER_CLOSE:
+            return {
+                ...state,
+                selectedNode: {}
             };
         default:
             return state;

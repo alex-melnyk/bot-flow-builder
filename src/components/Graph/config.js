@@ -66,22 +66,18 @@ const EmptyEdgeShape = (
 export default {
     NodeTypes: {
         [BlockTypes.BLOCK_TYPE_START]: {
-            // typeText: "_",
             shapeId: `#${SHAPE_START}`,
             shape: StartShape
         },
         [BlockTypes.BLOCK_TYPE_QUESTION]: {
-            // typeText: "_",
             shapeId: `#${SHAPE_QUESTION}`,
             shape: QuestionShape
         },
         [BlockTypes.BLOCK_TYPE_VARIANT]: {
-            // typeText: "_",
             shapeId: `#${SHAPE_VARIANT}`,
             shape: VariantShape
         },
         [BlockTypes.BLOCK_TYPE_ANSWER]: {
-            // typeText: "_",
             shapeId: `#${SHAPE_ANSWER}`,
             shape: AnswerShape
         }
