@@ -6,7 +6,8 @@ import {DragSource} from 'react-dnd';
 
 const styles = theme => ({
     card: {
-        flex: 1
+        flex: 1,
+        backgroundColor: 'transparent'
     },
     avatar: {
         backgroundColor: blue[500]
@@ -17,9 +18,11 @@ const styles = theme => ({
 class CardBlock extends Component {
     renderAvatar = (icon) => (
         icon &&
-        <Avatar className={this.props.classes.avatar}>
-            <Icon>{icon}</Icon>
-        </Avatar>
+        <div>
+            <Avatar className={this.props.classes.avatar}>
+                <Icon>{icon}</Icon>
+            </Avatar>
+        </div>
     );
 
     render() {
@@ -36,9 +39,7 @@ class CardBlock extends Component {
             <div style={{flex: 1}}>
                 <Card
                     className={classes.card}
-                    style={{
-                        opacity: isDragging ? 0.5 : 1
-                    }}
+                    style={{opacity: isDragging ? 0.5 : 1}}
                 >
                     <CardHeader
                         avatar={this.renderAvatar(icon)}
@@ -52,10 +53,9 @@ class CardBlock extends Component {
 }
 
 export default DragSource('card', {
-    beginDrag: (props) => ({
-        type: props.type
-    })
+    beginDrag: (props) => ({type: props.type})
 }, (connect, monitor) => ({
     connectDragSource: connect.dragSource(),
+    connectDragPreview: connect.dragPreview(),
     isDragging: monitor.isDragging()
 }))(withStyles(styles)(CardBlock));

@@ -1,66 +1,88 @@
-
-/*
-  Example config for GraphView component
-*/
 import React from 'react';
+import {blue} from "material-ui/colors";
 
-const EmptyShape = (
-    <symbol viewBox="0 0 100 100" id="empty">
-        <circle cx="50" cy="50" r="45"></circle>
-    </symbol>
-)
+import * as BlockTypes from "../../types/blockTypes";
 
-const SpecialShape = (
-    <symbol viewBox="0 0 100 100" id="special">
-        <rect transform="translate(50) rotate(45)" width="70" height="70"></rect>
-    </symbol>
-)
+const SHAPE_START = 'shape_start';
+const SHAPE_QUESTION = 'shape_question';
+const SHAPE_VARIANT = 'shape_variant';
+const SHAPE_ANSWER = 'shape_answer';
 
-const SpecialChildShape = (
-    <symbol viewBox="0 0 100 100" id="specialChild">
-        <rect x="2.5" y="0" width="95" height="97.5" fill="rgba(30, 144, 255, 0.12)"></rect>
+const shapeProps = {
+    cx: 10,
+    cy: 10,
+    r: 9
+};
+
+const iconProps = {
+    x: 7.5,
+    y: 10,
+    strokeWidth: 0,
+    fontFamily :"Material Icons",
+    fontSize: 5,
+    fill: blue[500]
+};
+
+const StartShape = (
+    <symbol id={SHAPE_START} viewBox="0 0 20 20">
+        <circle {...shapeProps} />
+        <text {...iconProps}>play_for_work</text>
     </symbol>
-)
+);
+
+const QuestionShape = (
+    <symbol id={SHAPE_QUESTION} viewBox="0 0 20 20">
+        <circle {...shapeProps} />
+        <text {...iconProps}>help_outline</text>
+    </symbol>
+);
+
+const VariantShape = (
+    <symbol id={SHAPE_VARIANT} viewBox="0 0 20 20">
+        <circle {...shapeProps} />
+        <text {...iconProps}>call_split</text>
+    </symbol>
+);
+
+const AnswerShape = (
+    <symbol id={SHAPE_ANSWER} viewBox="0 0 20 20">
+        <circle {...shapeProps} />
+        <text {...iconProps}>priority_high</text>
+    </symbol>
+);
 
 const EmptyEdgeShape = (
-    <symbol viewBox="0 0 50 50" id="emptyEdge">
-        <circle cx="25" cy="25" r="8" fill="currentColor"> </circle>
-    </symbol>
-)
-
-const SpecialEdgeShape = (
-    <symbol viewBox="0 0 50 50" id="specialEdge">
-        <rect transform="rotate(45)"  x="25" y="-4.5" width="15" height="15" fill="currentColor"></rect>
-    </symbol>
-)
+    <symbol viewBox="0 0 0 0" id="emptyEdge" />
+);
 
 export default {
     NodeTypes: {
-        empty: {
-            typeText: "None",
-            shapeId: "#empty",
-            shape: EmptyShape
+        [BlockTypes.BLOCK_TYPE_START]: {
+            typeText: "_",
+            shapeId: `#${SHAPE_START}`,
+            shape: StartShape
         },
-        special: {
-            typeText: "Special",
-            shapeId: "#special",
-            shape: SpecialShape
-        }
-    },
-    NodeSubtypes: {
-        specialChild: {
-            shapeId: "#specialChild",
-            shape: SpecialChildShape
+        [BlockTypes.BLOCK_TYPE_QUESTION]: {
+            typeText: "_",
+            shapeId: `#${SHAPE_QUESTION}`,
+            shape: QuestionShape
+        },
+        [BlockTypes.BLOCK_TYPE_VARIANT]: {
+            typeText: "_",
+            shapeId: `#${SHAPE_VARIANT}`,
+            shape: VariantShape
+        },
+        [BlockTypes.BLOCK_TYPE_ANSWER]: {
+            typeText: "_",
+            shapeId: `#${SHAPE_ANSWER}`,
+            shape: AnswerShape
         }
     },
     EdgeTypes: {
         emptyEdge: {
             shapeId: "#emptyEdge",
             shape: EmptyEdgeShape
-        },
-        specialEdge: {
-            shapeId: "#specialEdge",
-            shape: SpecialEdgeShape
         }
-    }
+    },
+    NodeSubtypes: {},
 }
