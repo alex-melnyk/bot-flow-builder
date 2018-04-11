@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Avatar, Button, Drawer, Icon, List, ListItem, ListItemAvatar, ListItemText, TextField} from "material-ui";
+import {Avatar, Drawer, Icon, List, ListItem, ListItemAvatar, ListItemText, TextField} from "material-ui";
 import {withStyles} from 'material-ui/styles';
 import {BlockMocks} from '../types';
 
@@ -46,22 +46,29 @@ class Details extends Component {
                                 secondary={block.content}
                             />
                         </ListItem>
+                        {/*<ListItem>*/}
+                        {/*<TextField*/}
+                        {/*fullWidth*/}
+                        {/*label="Name of block"*/}
+                        {/*helperText="Custom block name to easy identify"*/}
+                        {/*/>*/}
+                        {/*</ListItem>*/}
                         <ListItem>
                             <TextField
                                 fullWidth
                                 label="Text for block"
-                                helperText="Some important text"
+                                helperText="Text specified to the block"
                             />
                         </ListItem>
-                        <ListItem style={{justifyContent: 'flex-end'}}>
-                            <Button
-                                variant="raised"
-                                color="primary"
-                            >
-                                Save block
-                                <Icon className={classes.rightIcon}>save</Icon>
-                            </Button>
-                        </ListItem>
+                        {/*<ListItem style={{justifyContent: 'flex-end'}}>*/}
+                        {/*<Button*/}
+                        {/*variant="raised"*/}
+                        {/*color="primary"*/}
+                        {/*>*/}
+                        {/*Save block*/}
+                        {/*<Icon className={classes.rightIcon}>save</Icon>*/}
+                        {/*</Button>*/}
+                        {/*</ListItem>*/}
                     </List>
                 }
             </Drawer>

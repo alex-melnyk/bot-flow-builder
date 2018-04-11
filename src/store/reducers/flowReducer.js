@@ -2,6 +2,7 @@ import uuid from "uuid";
 
 import * as FlowActions from '../actions/flowActions';
 import * as DetailsActions from "../actions/detailsActions";
+import * as ImportExportActions from "../actions/importExportActions";
 
 const initialState = {
     nodes: [],
@@ -53,6 +54,11 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 selectedNode: {}
+            };
+        case ImportExportActions.IMPORT_ACTION_DATA_LOADED:
+            return {
+                ...initialState,
+                ...action.payload
             };
         default:
             return state;

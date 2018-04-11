@@ -1,0 +1,191 @@
+{
+  "nodes": [
+    {
+      "title": "Start",
+      "id": "0",
+      "type": "start",
+      "text": "*Have you been visited by the Home Office? Are you worried that your rights might have been breached? Or do you think that you have been reported to the Home Office by your employer, bank, GP, HMRC or others? If you want to know what to do and what rights you have in case an enforcement visit happens, answer the following questions.*\r\n\r\nPlease provide the answers to the following questions in confidence that any information you provide is strictly anonymous. You are not asked to provide any personal information (eg. name, address, date of birth etc.). We are regulated by the Office of the Immigration Services Commissioner, and you can be assured that all the details provided by you will not be passed on to any third parties, including authorities. We understand that this is a delicate issue and we are here to help.",
+      "x": 0,
+      "y": 81.33333587646484
+    },
+    {
+      "title": "Question",
+      "id": "1",
+      "type": "question",
+      "text": "*Did the IOs show a warrant to enter and search your premises?*",
+      "x": 267.2163391113281,
+      "y": 82.98233032226562
+    },
+    {
+      "title": "Variant",
+      "id": "2",
+      "type": "variant",
+      "text": "Yes",
+      "x": 267.2163391113281,
+      "y": 82.98233032226562
+    },
+    {
+      "title": "Variant",
+      "id": "3",
+      "type": "variant",
+      "text": "No",
+      "x": 263.5007019042969,
+      "y": 274.7406311035156
+    },
+    {
+      "title": "Question",
+      "id": "4",
+      "type": "question",
+      "text": "*Did they show you a warrant card with warrant number clearly visible?*",
+      "x": 728.8709754943848,
+      "y": 84.71571350097656
+    },
+    {
+      "title": "Variant",
+      "id": "5",
+      "type": "variant",
+      "text": "Yes",
+      "x": 728.3661980628967,
+      "y": 275.41937255859375
+    },
+    {
+      "title": "Variant",
+      "id": "6",
+      "type": "variant",
+      "text": "No",
+      "x": 940.0776062011719,
+      "y": 83.09383392333984
+    },
+    {
+      "title": "Answer",
+      "id": "7",
+      "type": "answer",
+      "text": "Note: IOs complied with their duty to do so.",
+      "x": 735.6819562911987,
+      "y": 472.96905517578125
+    },
+    {
+      "title": "Answer",
+      "id": "8",
+      "type": "answer",
+      "text": "Note: this is the procedure IOs must follow. If you’re worried that your rights were breached, speak to your lawyer.",
+      "x": 943.8518371582031,
+      "y": 277.2575378417969
+    },
+    {
+      "title": "Question",
+      "id": "9",
+      "type": "question",
+      "text": "*Did you request to see a warrant and identification documents of the officers?*",
+      "x": 265.19464111328125,
+      "y": 456.2181701660156
+    },
+    {
+      "title": "Variant",
+      "id": "10",
+      "type": "variant",
+      "text": "Yes",
+      "x": 494.204345703125,
+      "y": 460.3624267578125
+    },
+    {
+      "title": "Variant",
+      "id": "11",
+      "type": "variant",
+      "text": "No",
+      "x": 264.86138916015625,
+      "y": 649.0046081542969
+    },
+    {
+      "title": "Answer",
+      "id": "12",
+      "type": "answer",
+      "text": "Note: Good. You have a right to do so, and the IOs are under a duty to show you the warrant upon request.",
+      "x": 493.3037414550781,
+      "y": 641.3351745605469
+    },
+    {
+      "title": "Answer",
+      "id": "13",
+      "type": "answer",
+      "text": "Note: IOs are not under duty to show you a warrant. However, the duty arises if you request to see a warrant. Therefore, we advise you to always ask to see a warrant and identification documents from IOs before giving consent to enter the premises because this is your right.",
+      "x": 260.8613815307617,
+      "y": 841.638427734375
+    }
+  ],
+  "edges": [
+    {
+      "source": "0",
+      "target": "1",
+      "type": "emptyEdge"
+    },
+    {
+      "source": "1",
+      "target": "2",
+      "type": "emptyEdge"
+    },
+    {
+      "source": "1",
+      "target": "3",
+      "type": "emptyEdge"
+    },
+    {
+      "source": "2",
+      "target": "4",
+      "type": "emptyEdge"
+    },
+    {
+      "source": "4",
+      "target": "5",
+      "type": "emptyEdge"
+    },
+    {
+      "source": "4",
+      "target": "6",
+      "type": "emptyEdge"
+    },
+    {
+      "source": "5",
+      "target": "7",
+      "type": "emptyEdge"
+    },
+    {
+      "source": "6",
+      "target": "8",
+      "type": "emptyEdge"
+    },
+    {
+      "source": "3",
+      "target": "9",
+      "type": "emptyEdge"
+    },
+    {
+      "source": "9",
+      "target": "10",
+      "type": "emptyEdge"
+    },
+    {
+      "source": "9",
+      "target": "11",
+      "type": "emptyEdge"
+    },
+    {
+      "source": "10",
+      "target": "12",
+      "type": "emptyEdge"
+    },
+    {
+      "source": "11",
+      "target": "13",
+      "type": "emptyEdge"
+    }
+  ],
+  "selectedNode": {
+    "title": "Answer",
+    "id": "8",
+    "type": "answer",
+    "text": "Note: this is the procedure IOs must follow. If you’re worried that your rights were breached, speak to your lawyer.",
+    "x": 943.8518371582031,
+    "y": 277.2575378417969
+  }
+}

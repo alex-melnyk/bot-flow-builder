@@ -1,0 +1,128 @@
+[
+  {
+    "id": "0",
+    "parent": "",
+    "next": "",
+    "type": "start",
+    "text": "*Have you been visited by the Home Office? Are you worried that your rights might have been breached? Or do you think that you have been reported to the Home Office by your employer, bank, GP, HMRC or others? If you want to know what to do and what rights you have in case an enforcement visit happens, answer the following questions.*\r\n\r\nPlease provide the answers to the following questions in confidence that any information you provide is strictly anonymous. You are not asked to provide any personal information (eg. name, address, date of birth etc.). We are regulated by the Office of the Immigration Services Commissioner, and you can be assured that all the details provided by you will not be passed on to any third parties, including authorities. We understand that this is a delicate issue and we are here to help.",
+    "x": 0,
+    "y": 50
+  },
+  {
+    "id": "1",
+    "parent": "0",
+    "next": "",
+    "type": "question",
+    "text": "*Did the IOs show a warrant to enter and search your premises?*",
+    "x": 300,
+    "y": 50
+  },
+  {
+    "id": "2",
+    "parent": "1",
+    "next": "",
+    "type": "variant",
+    "text": "Yes",
+    "x": 600,
+    "y": 50
+  },
+  {
+    "id": "3",
+    "parent": "1",
+    "next": "",
+    "type": "variant",
+    "text": "No",
+    "x": 300,
+    "y": 250
+  },
+  {
+    "id": "4",
+    "parent": "2",
+    "next": "",
+    "type": "question",
+    "text": "*Did they show you a warrant card with warrant number clearly visible?*",
+    "x": 900,
+    "y": 50
+  },
+  {
+    "id": "5",
+    "parent": "4",
+    "next": "",
+    "type": "variant",
+    "text": "Yes",
+    "x": 900,
+    "y": 250
+  },
+  {
+    "id": "6",
+    "parent": "4",
+    "next": "",
+    "type": "variant",
+    "text": "No",
+    "x": 1200,
+    "y": 50
+  },
+  {
+    "id": "7",
+    "parent": "5",
+    "next": "1",
+    "type": "answer",
+    "text": "Note: IOs complied with their duty to do so.",
+    "x": 900,
+    "y": 450
+  },
+  {
+    "id": "8",
+    "parent": "6",
+    "next": "1",
+    "type": "answer",
+    "text": "Note: this is the procedure IOs must follow. If you’re worried that your rights were breached, speak to your lawyer.",
+    "x": 1200,
+    "y": 250
+  },
+  {
+    "id": "9",
+    "parent": "3",
+    "next": "",
+    "type": "question",
+    "text": "*Did you request to see a warrant and identification documents of the officers?*",
+    "x": 300,
+    "y": 450
+  },
+  {
+    "id": "10",
+    "parent": "9",
+    "next": "",
+    "type": "variant",
+    "text": "Yes",
+    "x": 600,
+    "y": 450
+  },
+  {
+    "id": "11",
+    "parent": "9",
+    "next": "",
+    "type": "variant",
+    "text": "No",
+    "x": 300,
+    "y": 650
+  },
+  {
+    "id": "12",
+    "parent": "10",
+    "next": "1",
+    "type": "answer",
+    "text": "Note: Good. You have a right to do so, and the IOs are under a duty to show you the warrant upon request.",
+    "x": 600,
+    "y": 650
+  },
+  {
+    "id": "13",
+    "parent": "11",
+    "next": "1",
+    "type": "answer",
+    "text": "Note: IOs are not under duty to show you a warrant. However, the duty arises if you request to see a warrant. Therefore, we advise you to always ask to see a warrant and identification documents from IOs before giving consent to enter the premises because this is your right.",
+    "x": 300,
+    "y": 850
+  }
+]

@@ -1,5 +1,4 @@
 import React from 'react';
-import {grey} from "material-ui/colors";
 
 import * as BlockTypes from "../../types/blockTypes";
 
@@ -25,7 +24,7 @@ const iconProps = {
     x: 25,
     y: 12.5,
     strokeWidth: 0,
-    fontFamily :"Material Icons",
+    fontFamily: "Material Icons",
     textAnchor: "middle",
     fontSize: 10,
     fill: "currentColor"
@@ -60,7 +59,7 @@ const AnswerShape = (
 );
 
 const EmptyEdgeShape = (
-    <symbol viewBox="0 0 0 0" id="emptyEdge" />
+    <symbol viewBox="0 0 0 0" id="emptyEdge"/>
 );
 
 export default {
