@@ -11,7 +11,9 @@ class ImportDialog extends Component {
                 open={true}
                 onClose={this.props.onCloseDialog}
             >
-                <DialogTitle id="alert-dialog-title">{"Use Google's location service?"}</DialogTitle>
+                <DialogTitle>
+                    Select JSON file which need to import:
+                </DialogTitle>
                 <DialogContent>
                     <Input
                         inputRef={(ref) => this.upload = ref}

@@ -5,6 +5,7 @@ import {Button, Divider, Drawer, List, ListItem, ListSubheader, withStyles} from
 import CardBlock from "./common/CardBlock";
 import {BlockMocks} from "../types";
 import ImportDialog from "./ImportDialog";
+import ExportDialog from "./ExportDialog";
 
 export const SIDEBAR_WIDTH = 350;
 
@@ -77,6 +78,14 @@ class Sidebar extends Component {
                     <ImportDialog
                         onCloseDialog={() => this.setState({showImportDialog: false})}
                         onDataLoaded={this.props.dataLoadedAction}
+                    />
+                }
+
+                {
+                    this.state.showExportDialog &&
+                    <ExportDialog
+                        onCloseDialog={() => this.setState({showExportDialog: false})}
+                        content={JSON.stringify({id: 0})}
                     />
                 }
             </Drawer>
