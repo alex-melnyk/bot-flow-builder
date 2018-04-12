@@ -1,7 +1,10 @@
 import {connect} from "react-redux";
 import Sidebar from "../components/Sidebar";
-import {dataLoadedAction} from "../store/actions/importExportActions";
+import {flowExportAction, flowImportAction} from "../store/actions/importExportActions";
 
-export default connect((state) => ({}), {
-    dataLoadedAction
+export default connect((state) => ({
+    exportFlow: state.flow.exportFlow
+}), {
+    flowImportAction,
+    flowExportAction
 })(Sidebar);

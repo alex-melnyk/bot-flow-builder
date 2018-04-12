@@ -7,7 +7,8 @@ import * as ImportExportActions from "../actions/importExportActions";
 const initialState = {
     nodes: [],
     edges: [],
-    selectedNode: {}
+    selectedNode: {},
+    exportFlow: null
 };
 
 export default (state = initialState, action) => {
@@ -54,6 +55,11 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 selectedNode: {}
+            };
+        case ImportExportActions.EXPORT_ACTION_DATA_BUILT:
+            return {
+                ...state,
+                ...action.payload
             };
         case ImportExportActions.IMPORT_ACTION_DATA_LOADED:
             return {

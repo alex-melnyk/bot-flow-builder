@@ -1,9 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {
-    Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Input,
-    withStyles
-} from "material-ui";
+import {Button, Dialog, DialogActions, CircularProgress, DialogContent, DialogContentText, DialogTitle, withStyles} from "material-ui";
 
 const styles = (theme) => ({});
 
@@ -18,9 +15,20 @@ class ExportDialog extends Component {
                     Here is source code of your flow:
                 </DialogTitle>
                 <DialogContent>
-                    <DialogContentText>
-                        <code>{this.props.content}</code>
-                    </DialogContentText>
+                    {
+                        this.props.content
+                            ? (
+                                <DialogContentText>
+                                    <pre><code>{JSON.stringify(this.props.content, null, '\t')}</code></pre>
+                                </DialogContentText>
+                            )
+                            : (
+                                <div style={{textAlign: 'center'}}>
+                                    <CircularProgress size={50} />
+                                </div>
+                            )
+                    }
+
                 </DialogContent>
                 <DialogActions>
                     <Button

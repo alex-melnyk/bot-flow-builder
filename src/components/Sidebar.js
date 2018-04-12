@@ -66,7 +66,10 @@ class Sidebar extends Component {
                             fullWidth
                             color="secondary"
                             variant="raised"
-                            onClick={() => this.setState({showExportDialog: true})}
+                            onClick={() => {
+                                this.props.flowExportAction();
+                                this.setState({showExportDialog: true});
+                            }}
                         >
                             Export
                         </Button>
@@ -77,7 +80,7 @@ class Sidebar extends Component {
                     this.state.showImportDialog &&
                     <ImportDialog
                         onCloseDialog={() => this.setState({showImportDialog: false})}
-                        onDataLoaded={this.props.dataLoadedAction}
+                        onDataLoaded={this.props.flowImportAction}
                     />
                 }
 
@@ -85,7 +88,7 @@ class Sidebar extends Component {
                     this.state.showExportDialog &&
                     <ExportDialog
                         onCloseDialog={() => this.setState({showExportDialog: false})}
-                        content={JSON.stringify({id: 0})}
+                        content={this.props.exportFlow}
                     />
                 }
             </Drawer>
@@ -94,7 +97,9 @@ class Sidebar extends Component {
 }
 
 Sidebar.propTypes = {
-    dataLoadedAction: PropTypes.func.isRequired
+    exportFlow: PropTypes.any,
+    flowImportAction: PropTypes.func.isRequired,
+    flowExportAction: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(Sidebar);
