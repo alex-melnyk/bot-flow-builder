@@ -69,7 +69,22 @@ export function flowExportAction() {
             };
         });
 
+
+
         setTimeout(() => {
+            const a = document.createElement("a");
+            const url = URL.createObjectURL(new Blob([JSON.stringify(exportFlow)], {type: 'application/json'}));
+
+            a.href = url;
+            a.download = 'ExportedFlow.json';
+            document.body.appendChild(a);
+            a.click();
+
+            setTimeout(function() {
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(url);
+            }, 0);
+
             dispatch({
                 type: EXPORT_ACTION_DATA_BUILT,
                 payload: {exportFlow}

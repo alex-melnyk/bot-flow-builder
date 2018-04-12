@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {Button, Dialog, DialogActions, CircularProgress, DialogContent, DialogContentText, DialogTitle, withStyles} from "material-ui";
+import {Button, CircularProgress, Dialog, DialogActions, DialogContent, DialogTitle, withStyles} from "material-ui";
 
 const styles = (theme) => ({});
 
@@ -18,13 +18,13 @@ class ExportDialog extends Component {
                     {
                         this.props.content
                             ? (
-                                <DialogContentText>
-                                    <pre><code>{JSON.stringify(this.props.content, null, '\t')}</code></pre>
-                                </DialogContentText>
+                                <pre>
+                                    {JSON.stringify(this.props.content, null, '\t')}
+                                </pre>
                             )
                             : (
                                 <div style={{textAlign: 'center'}}>
-                                    <CircularProgress size={50} />
+                                    <CircularProgress size={50}/>
                                 </div>
                             )
                     }
