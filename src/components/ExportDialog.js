@@ -5,9 +5,26 @@ import {Button, CircularProgress, Dialog, DialogActions, DialogContent, DialogTi
 const styles = (theme) => ({});
 
 class ExportDialog extends Component {
+    downloadFile = () => {
+        const dataUrl = URL.createObjectURL(new Blob([JSON.stringify(this.props.content)], {type: 'application/json'}));
+
+        const anchor = document.createElement("a");
+        anchor.href = dataUrl;
+        anchor.download = `flow_${new Date().getTime()}.json`;
+
+        document.body.appendChild(anchor);
+        anchor.click();
+
+        setTimeout(function () {
+            document.body.removeChild(anchor);
+            window.URL.revokeObjectURL(dataUrl);
+        }, 0);
+    };
+
     render() {
         return (
             <Dialog
+                fullScreen={true}
                 open={true}
                 onClose={this.props.onCloseDialog}
             >
@@ -18,7 +35,7 @@ class ExportDialog extends Component {
                     {
                         this.props.content
                             ? (
-                                <pre>
+                                <pre style={{whiteSpace: 'pre-wrap'}}>
                                     {JSON.stringify(this.props.content, null, '\t')}
                                 </pre>
                             )
@@ -32,10 +49,15 @@ class ExportDialog extends Component {
                 </DialogContent>
                 <DialogActions>
                     <Button
-                        color="primary"
                         variant="raised"
                         onClick={this.props.onCloseDialog}
-                    >OK</Button>
+                    >Close</Button>
+                    <Button
+                        color="primary"
+                        variant="raised"
+                        onClick={this.downloadFile}
+
+                    >Download</Button>
                 </DialogActions>
             </Dialog>
         );

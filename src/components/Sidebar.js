@@ -14,6 +14,9 @@ const styles = (theme) => ({
     drawerPaper: {
         position: 'relative',
         width: SIDEBAR_WIDTH
+    },
+    subheader: {
+        backgroundColor: 'white'
     }
 });
 
@@ -43,7 +46,7 @@ class Sidebar extends Component {
                 <div className={classes.toolbar}/>
                 <Divider/>
                 <List>
-                    <ListSubheader>
+                    <ListSubheader className={classes.subheader}>
                         Flow blocks
                     </ListSubheader>
                     {this.renderBlocks()}
