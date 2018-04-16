@@ -51,6 +51,17 @@ export default (state = initialState, action) => {
                 ...state,
                 ...action.payload
             };
+        case FlowActions.FLOW_ACTION_DELETE_NODE:
+            return {
+                ...state,
+                nodes: state.nodes.filter((node) => node.id !== action.payload.nodeId),
+                edges: state.edges.filter((edge) => edge.source !== action.payload.nodeId && edge.target !== action.payload.nodeId)
+            };
+        case FlowActions.FLOW_ACTION_DELETE_EDGE:
+            return {
+                ...state,
+                edges: state.edges.filter((edge) => edge.source !== action.payload.sourceId && edge.target !== action.payload.targetId)
+            };
         case DetailsActions.DETAILS_ACTION_DRAWER_CLOSE:
             return {
                 ...state,

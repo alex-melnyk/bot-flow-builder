@@ -4,6 +4,8 @@ export const FLOW_ACTION_UPDATE_NODE = 'FLOW_ACTION_UPDATE_NODE';
 export const FLOW_ACTION_ADD_NODE = 'FLOW_ACTION_ADD_NODE';
 export const FLOW_ACTION_ADD_EDGE = 'FLOW_ACTION_ADD_EDGE';
 export const FLOW_ACTION_SET_SELECTED_NODE = 'FLOW_ACTION_SET_SELECTED_NODE';
+export const FLOW_ACTION_DELETE_NODE = 'FLOW_ACTION_DELETE_NODE';
+export const FLOW_ACTION_DELETE_EDGE = 'FLOW_ACTION_DELETE_EDGE';
 
 /**
  *
@@ -56,9 +58,37 @@ export function addEdgeAction(nodesEdge) {
  *
  * @param selectedNode
  */
-export function setSelectedNode(selectedNode = {}) {
+export function setSelectedNodeAction(selectedNode = {}) {
     return {
         type: FLOW_ACTION_SET_SELECTED_NODE,
         payload: {selectedNode}
     }
+}
+
+/**
+ * Delete node with edge.
+ *
+ * @param nodeId id of node which need delete.
+ */
+export function deleteNodeAction(nodeId) {
+    return {
+        type: FLOW_ACTION_DELETE_NODE,
+        payload: {nodeId}
+    };
+}
+
+/**
+ * Delete directional edge between source and target.
+ *
+ * @param sourceId id of source node.
+ * @param targetId id of target node.
+ */
+export function deleteEdgeAction(sourceId, targetId) {
+    return {
+        type: FLOW_ACTION_DELETE_EDGE,
+        payload: {
+            sourceId,
+            targetId
+        }
+    };
 }

@@ -47,31 +47,53 @@ class Graph extends Component {
         });
     };
 
+    // Deletes a node from the graph
+    onDeleteNode = (viewNode) => {
+        // const graph = this.state.graph;
+        // const i = this.getNodeIndex(viewNode);
+        // graph.nodes.splice(i, 1);
+        //
+        // // Delete any connected edges
+        // const newEdges = graph.edges.filter((edge) => {
+        //     return edge.source !== viewNode[NODE_KEY] &&
+        //         edge.target !== viewNode[NODE_KEY]
+        // });
+        //
+        // graph.edges = newEdges;
+        //
+        // this.setState({graph: graph, selected: {}});
+
+        this.props.deleteNodeAction(viewNode.id);
+    };
+
+    // Called when an edge is deleted
+    onDeleteEdge = (viewEdge) => {
+        // const graph = this.state.graph;
+        // const i = this.getEdgeIndex(viewEdge);
+        // graph.edges.splice(i, 1);
+        // this.setState({graph: graph, selected: {}});
+
+        this.props.deleteEdgeAction(viewEdge.source, viewEdge.target);
+    };
+
     /*
      * Handlers/Interaction
      */
 
     // Node 'mouseUp' handler
     onSelectNode = (viewNode) => {
-        // Deselect events will send Null viewNode
-        // if (!!viewNode) {
-        //     this.setState({selected: viewNode});
-        // } else {
-        //     this.setState({selected: {}});
-        // }
-
         const {
             selectedNode,
-            setSelectedNode,
+            setSelectedNodeAction,
             drawerCloseAction,
             drawerOpenAction
         } = this.props;
 
         if (selectedNode && !viewNode) {
-            setSelectedNode();
+            setSelectedNodeAction();
             drawerCloseAction();
         } else {
-            setSelectedNode(viewNode);
+            setSelectedNodeAction(viewNode);
         }
 
         if (viewNode && selectedNode && viewNode.id === selectedNode.id) {
@@ -81,7 +103,7 @@ class Graph extends Component {
 
     // Edge 'mouseUp' handler
     onSelectEdge = (viewEdge) => {
-        // this.setState({selected: viewEdge});
+        this.props.setSelectedNodeAction(viewEdge);
     };
 
     // Called by 'drag' handler, etc..
@@ -107,23 +129,6 @@ class Graph extends Component {
         // this.setState({graph: graph});
     };
 
-    // Deletes a node from the graph
-    onDeleteNode = (viewNode) => {
-        // const graph = this.state.graph;
-        // const i = this.getNodeIndex(viewNode);
-        // graph.nodes.splice(i, 1);
-        //
-        // // Delete any connected edges
-        // const newEdges = graph.edges.filter((edge) => {
-        //     return edge.source !== viewNode[NODE_KEY] &&
-        //         edge.target !== viewNode[NODE_KEY]
-        // });
-        //
-        // graph.edges = newEdges;
-        //
-        // this.setState({graph: graph, selected: {}});
-    };
-
     // Called when an edge is reattached to a different target.
     onSwapEdge = (sourceViewNode, targetViewNode, viewEdge) => {
         // const graph = this.state.graph;
@@ -136,19 +141,6 @@ class Graph extends Component {
         //
         // this.setState({graph: graph});
     };
-
-    // Called when an edge is deleted
-    onDeleteEdge = (viewEdge) => {
-        // const graph = this.state.graph;
-        // const i = this.getEdgeIndex(viewEdge);
-        // graph.edges.splice(i, 1);
-        // this.setState({graph: graph, selected: {}});
-    };
-
-    // Helper to find the index of a given edge
-    getEdgeIndex(searchEdge) {
-        return this.props.edges.findIndex((edge) => edge.source === searchEdge.source && edge.target === searchEdge.target);
-    }
 
     /*
      * Render
@@ -213,7 +205,9 @@ Graph.propTypes = {
     updateNodeAction: PropTypes.func.isRequired,
     addNodeAction: PropTypes.func.isRequired,
     addEdgeAction: PropTypes.func.isRequired,
-    setSelectedNode: PropTypes.func.isRequired,
+    setSelectedNodeAction: PropTypes.func.isRequired,
+    deleteNodeAction: PropTypes.func.isRequired,
+    deleteEdgeAction: PropTypes.func.isRequired,
     drawerOpenAction: PropTypes.func.isRequired,
 };
 

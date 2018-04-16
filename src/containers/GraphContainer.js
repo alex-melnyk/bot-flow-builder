@@ -1,6 +1,13 @@
 import {connect} from "react-redux";
 import Graph from '../components/Graph';
-import {addEdgeAction, addNodeAction, setSelectedNode, updateNodeAction} from '../store/actions/flowActions';
+import {
+    addEdgeAction,
+    addNodeAction,
+    deleteEdgeAction,
+    deleteNodeAction,
+    setSelectedNodeAction,
+    updateNodeAction
+} from '../store/actions/flowActions';
 import {drawerCloseAction, drawerOpenAction} from "../store/actions/detailsActions";
 
 export default connect((state) => ({
@@ -9,7 +16,9 @@ export default connect((state) => ({
     updateNodeAction,
     addNodeAction,
     addEdgeAction,
-    setSelectedNode,
+    setSelectedNodeAction,
+    deleteNodeAction,
+    deleteEdgeAction,
     drawerOpenAction,
     drawerCloseAction
 })(Graph);
